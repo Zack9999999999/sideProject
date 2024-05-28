@@ -1,7 +1,7 @@
-package com.example.side.account.login.service.impl;
+package com.example.side.account.service.impl;
 
-import com.example.side.account.login.mybatis.LoginMapper;
-import com.example.side.account.login.service.ILoginService;
+import com.example.side.account.dao.LoginMapper;
+import com.example.side.account.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

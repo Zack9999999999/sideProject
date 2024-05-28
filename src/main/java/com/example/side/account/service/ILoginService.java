@@ -1,4 +1,4 @@
-package com.example.side.account.login.service;
+package com.example.side.account.service;
 
 public interface ILoginService {
 

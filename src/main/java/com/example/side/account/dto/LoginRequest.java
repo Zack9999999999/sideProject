@@ -1,4 +1,4 @@
-package com.example.side.account.login.dto;
+package com.example.side.account.dto;
 
 public class LoginRequest {
 

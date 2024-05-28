@@ -29,7 +29,7 @@ public class MybatisConfig {
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer configurer = new MapperScannerConfigurer();
-        configurer.setBasePackage("com.example.side.account.*.mybatis");
+        configurer.setBasePackage("com.example.side.account.dao");
         return configurer;
     }
 

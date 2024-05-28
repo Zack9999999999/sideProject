@@ -1,4 +1,4 @@
-package com.example.side.account.login.mybatis;
+package com.example.side.account.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 

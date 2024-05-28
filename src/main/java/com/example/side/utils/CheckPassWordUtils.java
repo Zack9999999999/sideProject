@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 @Component
 public class CheckPassWordUtils {
 
-    private static final String REGEXPN = "^(?=.*[az])(?=.*[AZ])(?=.*\\d)(?=.*[@#$%^&+=]).{8,20}$";
+    private static final String REGEXPN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=]).{8,20}$";
 
     public boolean checkPassWord(String passWord) {
 
@@ -16,6 +16,14 @@ public class CheckPassWordUtils {
         Matcher matcher = pattern.matcher(passWord);
 
         return matcher.matches();
+    }
+
+    public static void main(String[] args) {
+        String x = "@Ss1234567";
+
+        CheckPassWordUtils checkPassWordUtils = new CheckPassWordUtils();
+
+        System.out.println(checkPassWordUtils.checkPassWord(x));
     }
 
 }

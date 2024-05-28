@@ -1,7 +1,7 @@
-package com.example.side.account.login.controller;
+package com.example.side.account.controller;
 
-import com.example.side.account.login.service.ILoginService;
-import com.example.side.account.login.dto.LoginRequest;
+import com.example.side.account.service.ILoginService;
+import com.example.side.account.dto.LoginRequest;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

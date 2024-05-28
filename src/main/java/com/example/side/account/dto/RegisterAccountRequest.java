@@ -1,11 +1,6 @@
-package com.example.side.account.register.dto;
+package com.example.side.account.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
-
-public class RegisterAccount {
+public class RegisterAccountRequest {
 
     private Integer id;
 
