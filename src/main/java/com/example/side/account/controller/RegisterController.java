@@ -1,7 +1,9 @@
 package com.example.side.account.controller;
 
 import com.example.side.account.dto.RegisterAccountRequest;
+import com.example.side.account.model.Account;
 import com.example.side.account.service.IRegisterService;
+import com.example.side.vo.RestResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -22,10 +25,19 @@ public class RegisterController {
     private IRegisterService iRegisterService;
 
     @PostMapping("/createUser")
-    public Map<String, Object> createUser(@RequestBody RegisterAccountRequest registerAccountRequest) {
+    public RestResult<Map<String, Object>> createUser(@RequestBody RegisterAccountRequest registerAccountRequest) {
 
-        //再補驗證
+        Map<String, Object> map = new HashMap<>();
 
-        return iRegisterService.createUser(registerAccountRequest);
+        Account user = iRegisterService.createUser(registerAccountRequest);
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("name", user.getName());
+        userMap.put("email", user.getEmail());
+
+        logger.info("會員:{},創建成功", user.getName());
+        map.put("code", RestResult.SUCCESS);
+        map.put("msg", "創建成功");
+        map.put("data", userMap);
+        return RestResult.getRestResult(map);
     }
 }

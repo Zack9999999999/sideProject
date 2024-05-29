@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RegisterMapper {
 
-    void createUser(Account account);
+    int createUser(Account account);
 
     Account selectUser(String name);
 

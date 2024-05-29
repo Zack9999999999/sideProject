@@ -4,6 +4,8 @@ import com.example.side.account.dto.RegisterAccountRequest;
 import com.example.side.account.dao.RegisterMapper;
 import com.example.side.account.model.Account;
 import com.example.side.account.service.IRegisterService;
+import com.example.side.exception.UserAlreadyExistsException;
+import com.example.side.exception.WeakPasswordException;
 import com.example.side.utils.CheckPassWordUtils;
 import com.example.side.utils.EncryptionUtils;
 import org.mindrot.jbcrypt.BCrypt;
@@ -33,11 +35,12 @@ public class RegisterServiceImpl implements IRegisterService {
     private CheckPassWordUtils checkPassWordUtils;
 
     @Override
-    public Map<String, Object> createUser(RegisterAccountRequest registerAccountRequest) {
-        Map<String, Object> map = new HashMap<>();
+    public Account createUser(RegisterAccountRequest registerAccountRequest) {
 
         String userName = registerAccountRequest.getName();
         String passWord = registerAccountRequest.getPassWord();
+
+        //補檢查信箱
 
         //檢查帳號有沒有被創建過
         if (registerMapper.selectUser(userName) == null) {
@@ -51,9 +54,7 @@ public class RegisterServiceImpl implements IRegisterService {
             boolean verifyPassWord = checkPassWordUtils.checkPassWord(passWord);
             if (!verifyPassWord) {
                 logger.error("密碼{}強度太弱", passWord);
-                map.put("code", "error");
-                map.put("msg", "密碼強度太弱");
-                return map;
+                throw new WeakPasswordException("密碼強度太弱");
             }
 
             //密碼加密
@@ -66,14 +67,10 @@ public class RegisterServiceImpl implements IRegisterService {
 
             registerMapper.createUser(account);
 
-            map.put("code", "success");
-            map.put("msg", "註冊成功");
-            return map;
+            return registerMapper.selectUser(account.getName());
         }
-        logger.error("帳號{}已創建過", registerAccountRequest.getName());
-        map.put("code", "error");
-        map.put("msg", "帳號已創建過");
-        return map;
+        logger.error("帳號{}已創建過", userName);
+        throw new UserAlreadyExistsException("帳號已創建過");
     }
 
     public static void main(String[] args) {
